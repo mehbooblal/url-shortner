@@ -1,8 +1,7 @@
-package com.urlshortener.service;
+package com.urlshortner.service;
 
 import com.urlshortner.model.ShortUrl;
 import com.urlshortner.repository.UrlRepository;
-import com.urlshortner.service.UrlService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
