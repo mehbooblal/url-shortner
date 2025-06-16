@@ -1,0 +1,104 @@
+<!--<!DOCTYPE html>
+<html>
+<head><title>URL Shortener</title></head>
+<body>
+<h1>Shorten URL</h1>
+<form action="/api/urls" method="post">
+    <input type="text" name="url" placeholder="Enter URL" required />
+    <input type="text" name="alias" placeholder="Custom alias (optional)" />
+    <button type="submit">Shorten</button>
+</form>
+</body>
+</html>
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<h1>Shorten URL</h1>
+
+<form id="shorten-form">
+    <input type="text" id="url" name="url" placeholder="Enter URL" required />
+    <input type="text" id="alias" name="alias" placeholder="Custom alias (optional)" />
+    <button type="submit">Shorten</button>
+</form>
+
+<h2>All Shortened URLs</h2>
+<table id="url-table">
+    <thead>
+    <tr>
+        <th>Original URL</th>
+        <th>Short URL</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody id="url-list">
+    <!-- URLs will be inserted here -->
+    </tbody>
+</table>
+
+<script>
+    const baseUrl = window.location.origin;
+
+    // Fetch all URLs and add them to the table body.
+    async function fetchUrls() {
+        const response = await fetch('/api/urls');
+        const urls = await response.json();
+        const tbody = document.getElementById('url-list');
+        tbody.innerHTML = '';
+        urls.forEach(url => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+          <td><a href="${url.originalUrl}" target="_blank">${url.originalUrl}</a></td>
+          <td><a href="${baseUrl}/api/urls/${url.shortUrl}" target="_blank">${url.shortUrl}</a></td>
+
+          <td><button onclick="deleteUrl('${url.shortUrl}')">Delete</button></td>
+        `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // Delete a URL by its short url code.
+    async function deleteUrl(code) {
+        await fetch(`/api/urls/${code}`, { method: 'DELETE' });
+        fetchUrls();
+    }
+
+    /**
+     * Submit the form and add the URL to the table.
+     */
+    document.getElementById('shorten-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const url = document.getElementById('url').value;
+        const alias = document.getElementById('alias').value;
+
+        const params = new URLSearchParams();
+        params.append('url', url);
+        if (alias) params.append('alias', alias);
+
+        await fetch('/api/urls', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        });
+
+        document.getElementById('shorten-form').reset();
+        fetchUrls();
+    });
+
+    // Initial load
+    fetchUrls();
+</script>
+</body>
+</html>

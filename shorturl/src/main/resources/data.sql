@@ -1,0 +1,2 @@
+-- INSERT INTO short_urls (original_url, short_url) VALUES
+  --  ('https://www.google.com/', 'google');

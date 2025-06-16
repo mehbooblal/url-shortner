@@ -1,0 +1,8 @@
+
+-- DROP TABLE  short_urls;
+CREATE TABLE IF NOT EXISTS short_urls (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    original_url VARCHAR(2048) NOT NULL,
+    short_url VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
