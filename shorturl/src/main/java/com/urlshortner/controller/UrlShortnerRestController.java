@@ -5,6 +5,7 @@ import com.urlshortner.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.InvalidUrlException;
@@ -51,9 +52,11 @@ public class UrlShortnerRestController {
         return service.getAll();
     }
 
+    @Transactional
     @DeleteMapping("/{shortUrl}")
     public ResponseEntity<Void> deleteUrl(@PathVariable String shortUrl) {
         boolean deleted = service.deleteByShortUrl(shortUrl);
+        System.out.println("In deleteUrl, deleted = " + deleted + " for shortUrl = " + shortUrl);
 
         if (!deleted) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // 404 if URL not found

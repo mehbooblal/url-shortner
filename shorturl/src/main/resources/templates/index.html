@@ -71,6 +71,7 @@
 
     // Delete a URL by its short url code.
     async function deleteUrl(code) {
+        console.log(code);
         await fetch(`/api/urls/${code}`, { method: 'DELETE' });
         fetchUrls();
     }
