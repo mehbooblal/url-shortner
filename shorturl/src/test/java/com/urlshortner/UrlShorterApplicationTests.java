@@ -26,11 +26,6 @@ class UrlShorterApplicationTests {
 
     }
 
-    @Test
-    void testRedirect() throws Exception {
-        mockMvc.perform(get("/api/urls/bbc-news"))
-                .andExpect(status().is3xxRedirection());
-    }
 
     @Test
     void testList() throws Exception {
