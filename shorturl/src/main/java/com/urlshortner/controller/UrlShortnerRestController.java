@@ -40,7 +40,7 @@ public class UrlShortnerRestController {
         ShortUrl url = service.getByShortUrl(shortUrl);
 
         if (ObjectUtils.isEmpty(url)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("<!doctype html><title>404 Not Found</title><h1 style=\"text-align: center\">404 Not Found</h1>");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alias not found");
         }
 
         // Redirect 302
@@ -54,14 +54,15 @@ public class UrlShortnerRestController {
 
     @Transactional
     @DeleteMapping("/{shortUrl}")
-    public ResponseEntity<Void> deleteUrl(@PathVariable String shortUrl) {
+    public ResponseEntity<?> deleteUrl(@PathVariable String shortUrl) {
         boolean deleted = service.deleteByShortUrl(shortUrl);
-        System.out.println("In deleteUrl, deleted = " + deleted + " for shortUrl = " + shortUrl);
 
         if (!deleted) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // 404 if URL not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alias not found");
         }
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();  // 204 for successful deletion
+        return ResponseEntity.ok("Successfully deleted ");
+
+
     }
 }
