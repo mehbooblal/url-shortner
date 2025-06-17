@@ -35,5 +35,9 @@ It should:
 - Dockerfile.
 - README with:
   - How to build and run locally.
+     -   mvn clean package
+     -   ./mvnw clean install
+     -  java -jar target/shorturl-0.0.1-SNAPSHOT.jar
   - Example usage (UI and/or API).
   - Any notes or assumptions.
+    
