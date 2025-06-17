@@ -5,7 +5,7 @@ ENTRYPOINT ["top", "-b"]
 
 # Using base image
 FROM openjdk:17-jdk-slim
-COPY target/url-shortener-0.0.1-SNAPSHOT.jar app.jar
+COPY target/shorturl-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose a port (optional, if your app runs on a specific port)
 EXPOSE 8080
