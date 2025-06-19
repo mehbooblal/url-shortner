@@ -39,5 +39,9 @@ It should:
      -   ./mvnw clean install
      -  java -jar target/shorturl-0.0.1-SNAPSHOT.jar
   - Example usage (UI and/or API).
+  -   To use APIs :
+  -   To redirect : Method Type: Get -->  http://localhost:8080/api/urls/google
+  -   To Delete : Method type: Delete --> http://localhost:8080/api/urls/developer
+  -   To use Web site : http://localhost:8080/
   - Any notes or assumptions.
     
