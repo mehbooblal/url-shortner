@@ -32,8 +32,17 @@ It should:
 - Simple UI.
 - RESTful API matching the OpenAPI spec.
 - Tests.
-- Dockerfile.
+- Dockerfile. -- named Dockerfile
 - README with:
   - How to build and run locally.
+     -   mvn clean package
+     -   ./mvnw clean install
+     -   Go to the folder where the jar file is store
+     -  java -jar shorturl-0.0.1-SNAPSHOT.jar
   - Example usage (UI and/or API).
+  -   To use APIs :
+  -   To redirect : Method Type: Get -->  http://localhost:8080/api/urls/google
+  -   To Delete : Method type: Delete --> http://localhost:8080/api/urls/developer
+  -   To use Web site : http://localhost:8080/
   - Any notes or assumptions.
+    
